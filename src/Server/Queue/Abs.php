@@ -6,9 +6,9 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue;
+namespace AsyncDispatch\Server\Queue;
 
-use AsyncDis\AbstractJob;
+use AsyncDispatch\AbstractJob;
 use JimLog\Config;
 
 abstract class Abs

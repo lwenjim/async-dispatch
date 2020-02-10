@@ -6,13 +6,13 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue;
+namespace AsyncDispatch\Server\Queue;
 
 
-use AsyncDis\FromAlgoJob;
-use AsyncDis\FromAlgoAlgoData;
-use AsyncDis\Server\Queue\Kafka\ConsumerRdkafka;
-use AsyncDis\AbstractJob;
+use AsyncDispatch\FromAlgoJob;
+use AsyncDispatch\FromAlgoAlgoData;
+use AsyncDispatch\Server\Queue\Kafka\ConsumerRdkafka;
+use AsyncDispatch\AbstractJob;
 
 class Kafka extends Abs
 {

@@ -6,7 +6,7 @@
  * Time: 10:23
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 
 

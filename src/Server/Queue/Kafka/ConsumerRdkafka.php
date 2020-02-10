@@ -6,9 +6,9 @@
  * Time: 10:37 AM
  */
 
-namespace AsyncDis\Server\Queue\Kafka;
+namespace AsyncDispatch\Server\Queue\Kafka;
 
-use AsyncDis\Server\Queue\Kafka\Lite\SuperConsumer;
+use AsyncDispatch\Server\Queue\Kafka\Lite\SuperConsumer;
 use JimLog\Config;
 
 class ConsumerRdkafka

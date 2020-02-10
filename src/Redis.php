@@ -6,7 +6,7 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 use JimLog\Config;
 use Predis\Client;

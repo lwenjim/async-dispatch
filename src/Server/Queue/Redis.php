@@ -6,11 +6,11 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue;
+namespace AsyncDispatch\Server\Queue;
 
 
-use AsyncDis\AbstractJob;
-use AsyncDis\Redis as Cache;
+use AsyncDispatch\AbstractJob;
+use AsyncDispatch\Redis as Cache;
 use Predis\Client as Predis;
 
 class Redis extends Abs

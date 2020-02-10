@@ -6,7 +6,7 @@
  * Time: 1:33 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 use Particle\Validator\Validator as ToolValidator;
 

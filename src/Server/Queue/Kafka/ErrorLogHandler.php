@@ -6,7 +6,7 @@
  * Time: 1:56 PM
  */
 
-namespace AsyncDis\Server\Queue\Kafka;
+namespace AsyncDispatch\Server\Queue\Kafka;
 
 class ErrorLogHandler extends \Monolog\Handler\ErrorLogHandler
 {

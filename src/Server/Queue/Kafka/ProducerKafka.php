@@ -6,9 +6,9 @@
  * Time: 10:42 AM
  */
 
-namespace AsyncDis\Server\Queue\Kafka;
+namespace AsyncDispatch\Server\Queue\Kafka;
 
-use AsyncDis\Instance;
+use AsyncDispatch\Instance;
 use JimLog\Config;
 
 class ProducerKafka

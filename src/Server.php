@@ -6,11 +6,11 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
-use AsyncDis\Server\Pool;
-use AsyncDis\Server\Queue\Abs;
-use AsyncDis\Server\Queue\Factory;
+use AsyncDispatch\Server\Pool;
+use AsyncDispatch\Server\Queue\Abs;
+use AsyncDispatch\Server\Queue\Factory;
 
 class Server
 {

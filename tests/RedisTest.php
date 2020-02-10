@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class RedisTest extends TestCase
 {
-    use \AsyncDis\Redis;
+    use \AsyncDispatch\Redis;
 
     public function testRedis()
     {

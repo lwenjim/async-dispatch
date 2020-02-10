@@ -6,9 +6,9 @@
  * Time: 3:49 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
-use AsyncDis\Server\Queue\Kafka\ProducerKafka;
+use AsyncDispatch\Server\Queue\Kafka\ProducerKafka;
 
 abstract class AbstractJob
 {

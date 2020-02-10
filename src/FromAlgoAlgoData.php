@@ -6,7 +6,7 @@
  * Time: 8:45 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 class FromAlgoAlgoData extends AbstractAlgoData
 {

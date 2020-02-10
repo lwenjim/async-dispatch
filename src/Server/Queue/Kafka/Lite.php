@@ -6,12 +6,12 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue\Kafka;
+namespace AsyncDispatch\Server\Queue\Kafka;
 
 
-use AsyncDis\Server\Queue\Kafka\Lite\Consumer;
-use AsyncDis\Server\Queue\Kafka\Lite\Producer;
-use AsyncDis\Server\Queue\Kafka\Lite\SuperConsumer;
+use AsyncDispatch\Server\Queue\Kafka\Lite\Consumer;
+use AsyncDispatch\Server\Queue\Kafka\Lite\Producer;
+use AsyncDispatch\Server\Queue\Kafka\Lite\SuperConsumer;
 
 class Lite
 {

@@ -6,7 +6,7 @@
  * Time: 4:55 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 use GuzzleHttp\Client;
 

@@ -6,7 +6,7 @@
  * Time: 8:49 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 use Particle\Validator\ValidationResult;
 use Particle\Validator\Validator;

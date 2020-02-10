@@ -6,7 +6,7 @@
  * Time: 8:10 PM
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 
 class FromAlgoJob extends AbstractJob

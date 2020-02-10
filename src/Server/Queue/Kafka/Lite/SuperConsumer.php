@@ -6,9 +6,9 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue\Kafka\Lite;
+namespace AsyncDispatch\Server\Queue\Kafka\Lite;
 
-use AsyncDis\Server\Queue\Kafka\Lite;
+use AsyncDispatch\Server\Queue\Kafka\Lite;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 

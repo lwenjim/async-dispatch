@@ -6,7 +6,7 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDis\Server\Queue;
+namespace AsyncDispatch\Server\Queue;
 
 use InvalidArgumentException;
 

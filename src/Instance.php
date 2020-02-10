@@ -6,7 +6,7 @@
  * Time: 12:21
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 
 trait Instance

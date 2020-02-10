@@ -6,7 +6,7 @@
  * Time: 00:21
  */
 
-namespace AsyncDis;
+namespace AsyncDispatch;
 
 
 use Illuminate\Translation\ArrayLoader;
