@@ -23,7 +23,6 @@ phpunit.phar
 
 # local phpunit config
 phpunit.xml
-createMysqlDBTable.php
 
 # runtime log
 nohup.out
