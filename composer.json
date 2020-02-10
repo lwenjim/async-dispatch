@@ -1,0 +1,50 @@
+{
+    "name": "lwenjim/async-dispatch",
+    "description": "record log",
+    "version": "1.0",
+    "license": "MIT",
+    "require": {
+        "ext-json": "^1.5",
+        "ext-pcntl": "^7.1",
+        "ext-posix": "^7.1",
+        "ext-rdkafka": "~4.0",
+        "ext-redis": "^5.1",
+        "ext-sockets": "^7.1",
+        "ext-swoole": "^4.2",
+        "guzzlehttp/guzzle": "6.3.3",
+        "illuminate/validation": "v5.8.29",
+        "lwenjim/log": "1.0.x-dev",
+        "monolog/monolog": "1.24.0",
+        "particle/validator": "2.3.3",
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "AsyncDis\\": "src/"
+        },
+        "files": [
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "eaglewu/swoole-ide-helper": "dev-master",
+        "phpunit/phpunit": "7.5.9"
+    },
+    "config": {
+        "secure-http": false,
+        "vendor-dir" : "vendor",
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
