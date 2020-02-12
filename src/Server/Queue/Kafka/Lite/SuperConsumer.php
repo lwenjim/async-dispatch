@@ -127,7 +127,7 @@ class SuperConsumer
             } else {
                 $conf->set('Queue.buffering.max.ms', 1);
             }
-            $conf->setDefaultTopicConf($this->getTopicConf());
+            @$conf->setDefaultTopicConf($this->getTopicConf());
         }
         return $conf;
     }

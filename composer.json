@@ -3,6 +3,7 @@
     "description": "record log",
     "version": "1.0",
     "license": "MIT",
+    "type": "project",
     "require": {
         "ext-json": "^1.5",
         "ext-pcntl": "^7.1",
@@ -20,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AsyncDis\\": "src/"
+            "AsyncDispatch\\": "src/"
         },
         "files": [
         ]
@@ -36,7 +37,7 @@
     },
     "config": {
         "secure-http": false,
-        "vendor-dir" : "vendor",
+        "vendor-dir": "vendor",
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true

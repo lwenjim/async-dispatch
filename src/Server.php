@@ -57,7 +57,7 @@ class Server
         $this->checkEnv();
     }
 
-    public function run($procNum)
+    public function start($procNum)
     {
         $this->setPool(new Pool($this->getQueue(), $procNum));
         $this->getPool()->start();
@@ -77,7 +77,7 @@ class Server
         return $this->getPool()->getProcess();
     }
 
-    public function closePool($signal)
+    public function stop($signal)
     {
         if (($signal < 1 || $signal > 31) && $signal != 99) {
             echo sprintf("signal must in 1 between 31,given int(%s)\n", $signal);
@@ -102,7 +102,7 @@ class Server
     public function getPidByQueueName($force = false)
     {
         $queueName = $this->getQueue()->getQueueName();
-        $ret       = shell_exec($cmd = "ps -ef|grep /process/pool/start/queueName/|grep -v grep|grep /{$queueName}/|grep ".basename(APP_PATH)."|awk '{print " . ($force ? '$2' : '$3') . "}'");
+        $ret       = shell_exec($cmd = "ps -ef|grep -v grep|grep AsyncDispatch|awk '{print " . ($force ? '$2' : '$3') . "}'");
         if (!preg_match("/[0-9\n]+/", $ret)) {
             return false;
         }

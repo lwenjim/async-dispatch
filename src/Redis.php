@@ -27,9 +27,4 @@ trait Redis
         }
         return $redis;
     }
-
-    public function getRedisKey($id)
-    {
-        return "course_v5:{$id}";
-    }
 }

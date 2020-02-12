@@ -10,6 +10,7 @@ namespace AsyncDispatch\Server\Queue\Kafka;
 
 use AsyncDispatch\Server\Queue\Kafka\Lite\SuperConsumer;
 use JimLog\Config;
+use JimLog\Ini;
 
 class ConsumerRdkafka
 {
@@ -39,12 +40,12 @@ class ConsumerRdkafka
         $this->liteKafka = $liteKafka;
     }
 
-    public function getConfig(): ?Config
+    public function getConfig(): ?Ini
     {
         return $this->config;
     }
 
-    public function setConfig(?Config $config): void
+    public function setConfig(?Ini $config): void
     {
         $this->config = $config;
     }
@@ -71,7 +72,7 @@ class ConsumerRdkafka
     {
         $this->setTopic(substr($topic, 6));
         $this->setConfig(Config::kafka());
-        $this->setLiteKafka(new Lite($this->getConfig()->get('kafka.host')));
+        $this->setLiteKafka(new Lite($this->getConfig()->get('default.host')));
     }
 
     public function pop($timeout): ?string
@@ -88,8 +89,8 @@ class ConsumerRdkafka
 
     protected function aliveConsumer()
     {
-        $topic   = $this->getConfig()->get('kafka.topic_return');
-        $groupId = $this->getConfig()->get('kafka.group_id');
+        $topic   = $this->getConfig()->get('default.topic_return');
+        $groupId = $this->getConfig()->get('default.group_id');
         $this->setConsumer($this->getLiteKafka()->newSuperConsumer($topic, $groupId));
     }
 }

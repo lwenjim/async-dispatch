@@ -10,5 +10,5 @@ for queue in "${queues[@]}" ; do
     # echo -e "$cmd\n"
     # $cmd
 
-    ps -ef|grep ${config[0]}|grep -v grep|awk '{print $2,$9,$10}'|awk -F 'request_uri=/process/pool/start/queueName/' '{print $1,$2}'
+    ps -ef|grep ${config[0]}|grep -v grep
 done

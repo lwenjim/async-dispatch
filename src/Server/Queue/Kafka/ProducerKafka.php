@@ -10,6 +10,7 @@ namespace AsyncDispatch\Server\Queue\Kafka;
 
 use AsyncDispatch\Instance;
 use JimLog\Config;
+use JimLog\Ini;
 
 class ProducerKafka
 {
@@ -39,12 +40,12 @@ class ProducerKafka
         $this->liteKafka = $liteKafka;
     }
 
-    public function getConfig(): ?Config
+    public function getConfig(): ?Ini
     {
         return $this->config;
     }
 
-    public function setConfig(?Config $config): void
+    public function setConfig(?Ini $config): void
     {
         $this->config = $config;
     }
@@ -68,8 +69,8 @@ class ProducerKafka
     {
         return array_map(function ($item) {
             list($ip, $port) = explode(":", $item);
-            return $ip . ':' . ($port ? $port : $this->getConfig()->get('kafka.port'));
-        }, explode(",", $this->getConfig()->get('kafka.host')));
+            return $ip . ':' . ($port ? $port : $this->getConfig()->get('default.port'));
+        }, explode(",", $this->getConfig()->get('default.host')));
     }
 
     public static function sendAlgo(array $objMessage)

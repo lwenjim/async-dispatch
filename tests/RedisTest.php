@@ -20,6 +20,6 @@ class RedisTest extends TestCase
     public function testRedis()
     {
         Config::loadIni();
-        print_r(Config::redis()->get('pool.key.pre'));
+        debug(Config::redis()->get('pool.key.pre'));
     }
 }
