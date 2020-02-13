@@ -6,11 +6,11 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 
 
 use AsyncDispatch\Instance;
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 use RdKafka\Conf;
 use RdKafka\Producer as RdKafkaProducer;
 use RdKafka\ProducerTopic;
@@ -32,7 +32,7 @@ class Producer
         return $this;
     }
 
-    protected function __construct(Lite $kafKaLite)
+    protected function __construct(Manager $kafKaLite)
     {
         $producer = new RdKafkaProducer($this->getKafKaConf());
         $producer->addBrokers($kafKaLite->getBrokerList());

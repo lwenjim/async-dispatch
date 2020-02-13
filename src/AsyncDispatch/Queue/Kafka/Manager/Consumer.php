@@ -6,9 +6,9 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 use RdKafka\Conf;
 use RdKafka\Consumer as RdKafkaConsumer;
 use RdKafka\ConsumerTopic;
@@ -23,7 +23,7 @@ class Consumer
     protected        $kafKaLite = null;
     protected static $instance     = [];
 
-    public function getKafKaLite(): Lite
+    public function getKafKaLite(): Manager
     {
         return $this->kafKaLite;
     }
@@ -64,7 +64,7 @@ class Consumer
         $this->consumer = $consumer;
     }
 
-    protected function __construct(Lite $kafKaLite)
+    protected function __construct(Manager $kafKaLite)
     {
         $this->setConsumer(new RdKafkaConsumer($this->getKafKaConf()));
         $this->getConsumer()->addBrokers($kafKaLite->getBrokerList());
@@ -170,7 +170,7 @@ class Consumer
         return $conf;
     }
 
-    public static function getInstance(Lite $liteKafka, $channel = 'default')
+    public static function getInstance(Manager $liteKafka, $channel = 'default')
     {
         if (!isset(static::$instance[$channel])) {
             static::$instance[$channel] = new static($liteKafka);

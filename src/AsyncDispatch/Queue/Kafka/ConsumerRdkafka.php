@@ -10,7 +10,7 @@ namespace AsyncDispatch\AsyncDispatch\Queue\Kafka;
 
 use AsyncDispatch\Config;
 use AsyncDispatch\Instance;
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite\SuperConsumer;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager\SuperConsumer;
 use JimLog\Ini;
 
 class ConsumerRdkafka
@@ -31,12 +31,12 @@ class ConsumerRdkafka
         $this->consumer = $consumer;
     }
 
-    public function getLiteKafka(): Lite
+    public function getLiteKafka(): Manager
     {
         return $this->liteKafka;
     }
 
-    public function setLiteKafka(Lite $liteKafka): void
+    public function setLiteKafka(Manager $liteKafka): void
     {
         $this->liteKafka = $liteKafka;
     }
@@ -65,7 +65,7 @@ class ConsumerRdkafka
     {
         $this->setTopic(substr($topic, 6));
         $this->setConfig(Config::kafka());
-        $this->setLiteKafka(new Lite($this->getConfig()->get('default.host')));
+        $this->setLiteKafka(new Manager($this->getConfig()->get('default.host')));
     }
 
     public function pop($timeout): ?string

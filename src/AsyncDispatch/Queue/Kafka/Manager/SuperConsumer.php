@@ -6,10 +6,10 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 
 use AsyncDispatch\Instance;
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 
@@ -23,12 +23,12 @@ class SuperConsumer
     protected $consumer             = null;
     protected $liteKafka            = null;
 
-    public function getLiteKafka(): Lite
+    public function getLiteKafka(): Manager
     {
         return $this->liteKafka;
     }
 
-    public function setLiteKafka(Lite $liteKafka): void
+    public function setLiteKafka(Manager $liteKafka): void
     {
         $this->liteKafka = $liteKafka;
     }
@@ -97,7 +97,7 @@ class SuperConsumer
         }
     }
 
-    protected function __construct(Lite $liteKafka)
+    protected function __construct(Manager $liteKafka)
     {
         $this->setLiteKafka($liteKafka);
         $this->setConsumer(new KafkaConsumer($this->getKafkaConf()));

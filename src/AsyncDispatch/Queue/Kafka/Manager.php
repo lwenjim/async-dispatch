@@ -9,11 +9,11 @@
 namespace AsyncDispatch\AsyncDispatch\Queue\Kafka;
 
 
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite\Consumer;
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite\Producer;
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite\SuperConsumer;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager\Consumer;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager\Producer;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager\SuperConsumer;
 
-class Lite
+class Manager
 {
     protected $brokerList = "";
     protected $topic      = "";
@@ -66,7 +66,7 @@ class Lite
         return Consumer::getInstance($this);
     }
 
-    public function newSuperConsumer($topic, $groupId)
+    public function newSuperConsumer($topic, $groupId): SuperConsumer
     {
         $this->setTopic($topic);
         $this->setGroupId($groupId);

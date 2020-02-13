@@ -19,12 +19,12 @@ class ProducerKafka
     protected $config    = null;
     protected $topic     = null;
 
-    public function getLiteKafka(): ?Lite
+    public function getLiteKafka(): ?Manager
     {
         return $this->liteKafka;
     }
 
-    public function setLiteKafka(?Lite $liteKafka): void
+    public function setLiteKafka(?Manager $liteKafka): void
     {
         $this->liteKafka = $liteKafka;
     }
@@ -42,7 +42,7 @@ class ProducerKafka
     protected function __construct()
     {
         $this->setConfig(Config::kafka());
-        $this->setLiteKafka(new Lite(implode(',', $this->getBrokerList())));
+        $this->setLiteKafka(new Manager(implode(',', $this->getBrokerList())));
     }
 
     public function send(string $data)

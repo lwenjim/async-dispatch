@@ -14,7 +14,7 @@ class Factory
 {
     public static function factory(): ?Abs
     {
-        switch (ucfirst(Config::get('queue.dirver'))) {
+        switch (ucfirst((string)Config::get('queue.dirver'))) {
             case 'Kafka':
                 return Kafka::getInstance();
                 break;
