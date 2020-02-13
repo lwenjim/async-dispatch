@@ -15,18 +15,18 @@ use JimLog\Ini;
 class ProducerKafka
 {
     use Instance;
-    protected $liteKafka = null;
-    protected $config    = null;
-    protected $topic     = null;
+    protected $manager = null;
+    protected $config  = null;
+    protected $topic   = null;
 
-    public function getLiteKafka(): ?Manager
+    public function getManager(): ?Manager
     {
-        return $this->liteKafka;
+        return $this->manager;
     }
 
-    public function setLiteKafka(?Manager $liteKafka): void
+    public function setManager(?Manager $manager): void
     {
-        $this->liteKafka = $liteKafka;
+        $this->manager = $manager;
     }
 
     public function getConfig(): ?Ini
@@ -42,14 +42,14 @@ class ProducerKafka
     protected function __construct()
     {
         $this->setConfig(Config::kafka());
-        $this->setLiteKafka(new Manager(implode(',', $this->getBrokerList())));
+        $this->setManager(new Manager(implode(',', $this->getBrokerList())));
     }
 
     public function send(string $data)
     {
         $topic = $this->getConfig()->get('default.topic');
-        $this->getLiteKafka()->setTopic($topic);
-        $Producer = $this->getLiteKafka()->newProducer();
+        $this->getManager()->setTopic($topic);
+        $Producer = $this->getManager()->newProducer();
         $Producer->setMessage(0, $data);
         debug($data, "ProducerKafka::send--topic--{$topic}");
     }

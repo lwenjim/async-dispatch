@@ -16,10 +16,10 @@ use JimLog\Ini;
 class ConsumerRdkafka
 {
     use Instance;
-    protected $liteKafka = null;
-    protected $config    = null;
-    protected $topic     = null;
-    protected $consumer  = null;
+    protected $manager  = null;
+    protected $config   = null;
+    protected $topic    = null;
+    protected $consumer = null;
 
     public function getConsumer(): ?SuperConsumer
     {
@@ -31,14 +31,14 @@ class ConsumerRdkafka
         $this->consumer = $consumer;
     }
 
-    public function getLiteKafka(): Manager
+    public function getManager(): Manager
     {
-        return $this->liteKafka;
+        return $this->manager;
     }
 
-    public function setLiteKafka(Manager $liteKafka): void
+    public function setManager(Manager $manager): void
     {
-        $this->liteKafka = $liteKafka;
+        $this->manager = $manager;
     }
 
     public function getConfig(): ?Ini
@@ -65,7 +65,7 @@ class ConsumerRdkafka
     {
         $this->setTopic(substr($topic, 6));
         $this->setConfig(Config::kafka());
-        $this->setLiteKafka(new Manager($this->getConfig()->get('default.host')));
+        $this->setManager(new Manager($this->getConfig()->get('default.host')));
     }
 
     public function pop($timeout): ?string
@@ -84,6 +84,6 @@ class ConsumerRdkafka
     {
         $topic   = $this->getConfig()->get('default.topic_return');
         $groupId = $this->getConfig()->get('default.group_id');
-        $this->setConsumer($this->getLiteKafka()->newSuperConsumer($topic, $groupId));
+        $this->setConsumer($this->getManager()->newSuperConsumer($topic, $groupId));
     }
 }
