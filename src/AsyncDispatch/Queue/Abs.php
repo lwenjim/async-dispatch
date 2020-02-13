@@ -26,9 +26,9 @@ abstract class Abs
 
     protected $preQueueName = null;
 
-    protected function __construct(?string $queueName = null)
+    protected function __construct()
     {
-        $this->setQueueName($queueName);
+        $this->setQueueName('');
         $this->setPreQueueName((string)Config::get('queue.redis.preKey'));
     }
 

@@ -27,10 +27,10 @@ class Kafka extends Abs
         $this->kafkaProduct = $kafkaProduct;
     }
 
-    protected function __construct(?string $queueName = null)
+    protected function __construct()
     {
-        parent::__construct($queueName);
-        $this->setKafkaConsumer($queueName);
+        parent::__construct();
+        $this->setKafkaConsumer();
         $this->setKafkaProduct(ProducerKafka::getInstance());
     }
 
@@ -39,9 +39,9 @@ class Kafka extends Abs
         return $this->kafkaConsumer;
     }
 
-    public function setKafkaConsumer(string $queueName)
+    public function setKafkaConsumer()
     {
-        $this->kafkaConsumer = ConsumerRdkafka::getInstance($queueName);
+        $this->kafkaConsumer = ConsumerRdkafka::getInstance();
     }
 
     public function getValue(): string

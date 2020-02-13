@@ -61,10 +61,10 @@ class ConsumerRdkafka
         $this->topic = $topic;
     }
 
-    protected function __construct(string $topic)
+    protected function __construct()
     {
-        $this->setTopic(substr($topic, 6));
         $this->setConfig(Config::kafka());
+        $this->setTopic($this->getConfig()->get('default.topic'));
         $this->setManager(new Manager($this->getConfig()->get('default.host')));
     }
 

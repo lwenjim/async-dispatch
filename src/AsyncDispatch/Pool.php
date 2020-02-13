@@ -6,7 +6,7 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Server;
+namespace AsyncDispatch\AsyncDispatch;
 
 use AsyncDispatch\AsyncDispatch\Queue\Abs;
 use AsyncDispatch\AsyncDispatch\Queue\Factory;
@@ -102,7 +102,8 @@ class Pool
         $this->setQueue(Factory::factory());
         $this->setMasterProcessId(posix_getpid());
         $this->setPool(new ProcessPool((int)Config::get('queue.num'), 0, 0));
-        self::bind();
+        //self::bind();
+        $this->_workerStart();
     }
 
     public function workerStart(ProcessPool $pool, $workerId)

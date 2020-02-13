@@ -6,7 +6,7 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Server;
+namespace AsyncDispatch\AsyncDispatch;
 
 class File
 {
