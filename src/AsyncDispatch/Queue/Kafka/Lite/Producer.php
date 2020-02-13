@@ -6,11 +6,11 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Server\Queue\Kafka\Lite;
+namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
 
 
 use AsyncDispatch\Instance;
-use AsyncDispatch\Server\Queue\Kafka\Lite;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\Lite;
 use RdKafka\Conf;
 use RdKafka\Producer as RdKafkaProducer;
 use RdKafka\ProducerTopic;

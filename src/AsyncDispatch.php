@@ -8,7 +8,7 @@
 
 namespace AsyncDispatch;
 
-use AsyncDispatch\Server\Pool;
+use AsyncDispatch\AsyncDispatch\Pool;
 
 class AsyncDispatch
 {

@@ -6,7 +6,7 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Server\Queue;
+namespace AsyncDispatch\AsyncDispatch\Queue;
 
 use AsyncDispatch\AbstractJob;
 use AsyncDispatch\Instance;

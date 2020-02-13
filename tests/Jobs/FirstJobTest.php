@@ -23,5 +23,6 @@ class FirstJobTest extends TestCase
     {
         $job = new FirstJob(new FirstParameter());
         $job->dispatch();
+        $this->assertFalse(false);
     }
 }
