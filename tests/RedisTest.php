@@ -7,7 +7,7 @@
  */
 
 
-namespace Tests;
+namespace AsyncDispatch\Tests;
 
 
 use JimLog\Config;

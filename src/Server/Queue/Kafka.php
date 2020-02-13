@@ -9,19 +9,29 @@
 namespace AsyncDispatch\Server\Queue;
 
 
-use AsyncDispatch\FromAlgoJob;
-use AsyncDispatch\FromAlgoAlgoData;
 use AsyncDispatch\Server\Queue\Kafka\ConsumerRdkafka;
-use AsyncDispatch\AbstractJob;
+use AsyncDispatch\Server\Queue\Kafka\ProducerKafka;
 
 class Kafka extends Abs
 {
     protected $kafkaConsumer = null;
+    protected $kafkaProduct  = null;
+
+    public function getKafkaProduct(): ProducerKafka
+    {
+        return $this->kafkaProduct;
+    }
+
+    public function setKafkaProduct($kafkaProduct): void
+    {
+        $this->kafkaProduct = $kafkaProduct;
+    }
 
     protected function __construct(?string $queueName = null)
     {
         parent::__construct($queueName);
         $this->setKafkaConsumer($queueName);
+        $this->setKafkaProduct(ProducerKafka::getInstance());
     }
 
     public function getKafkaConsumer(): ConsumerRdkafka
@@ -34,14 +44,13 @@ class Kafka extends Abs
         $this->kafkaConsumer = ConsumerRdkafka::getInstance($queueName);
     }
 
-    public function pop(): ?AbstractJob
+    public function getValue(): string
     {
-        $job = $this->getKafkaConsumer()->pop(60);
-        $this->beforeParse($job);
-        if (!empty($job)) {
-            $job = new FromAlgoJob(new FromAlgoAlgoData($job, $this->getKafkaConsumer()->getTopic(), 0));
-            $this->afterParse($job);
-        }
-        return $job;
+        return (string)$this->getKafkaConsumer()->pop(60);
+    }
+
+    public function push($data)
+    {
+        $this->getKafkaProduct()->send($data);
     }
 }

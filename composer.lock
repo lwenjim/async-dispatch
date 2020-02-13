@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b17f4627a440435767849107ae93e666",
+    "content-hash": "a56cb54ed328549d7eac3309bc3133f8",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -686,12 +686,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lwenjim/log.git",
-                "reference": "1cdabe519b50f9aa4ecf6fa6243df523cdbe52ee"
+                "reference": "6f830b22302464d015faececc378c1642df7b4dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lwenjim/log/zipball/1cdabe519b50f9aa4ecf6fa6243df523cdbe52ee",
-                "reference": "1cdabe519b50f9aa4ecf6fa6243df523cdbe52ee",
+                "url": "https://api.github.com/repos/lwenjim/log/zipball/6f830b22302464d015faececc378c1642df7b4dc",
+                "reference": "6f830b22302464d015faececc378c1642df7b4dc",
                 "shasum": ""
             },
             "require": {
@@ -720,7 +720,7 @@
                 "MIT"
             ],
             "description": "record log",
-            "time": "2020-02-10T14:45:52+00:00"
+            "time": "2020-02-13T14:11:18+00:00"
         },
         {
             "name": "monolog/monolog",

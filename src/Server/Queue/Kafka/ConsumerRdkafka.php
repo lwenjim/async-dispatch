@@ -8,17 +8,18 @@
 
 namespace AsyncDispatch\Server\Queue\Kafka;
 
+use AsyncDispatch\Config;
+use AsyncDispatch\Instance;
 use AsyncDispatch\Server\Queue\Kafka\Lite\SuperConsumer;
-use JimLog\Config;
 use JimLog\Ini;
 
 class ConsumerRdkafka
 {
-    protected static $instance  = [];
-    protected        $liteKafka = null;
-    protected        $config    = null;
-    protected        $topic     = null;
-    protected        $consumer  = null;
+    use Instance;
+    protected $liteKafka = null;
+    protected $config    = null;
+    protected $topic     = null;
+    protected $consumer  = null;
 
     public function getConsumer(): ?SuperConsumer
     {
@@ -58,14 +59,6 @@ class ConsumerRdkafka
     public function setTopic($topic): void
     {
         $this->topic = $topic;
-    }
-
-    public static function getInstance($topic, $channel = 'default')
-    {
-        if (!isset(static::$instance[$channel])) {
-            static::$instance[$channel] = new static($topic);
-        }
-        return static::$instance[$channel];
     }
 
     protected function __construct(string $topic)

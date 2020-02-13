@@ -9,11 +9,12 @@
 namespace AsyncDispatch\Server\Queue;
 
 use AsyncDispatch\AbstractJob;
-use JimLog\Config;
+use AsyncDispatch\Instance;
+use AsyncDispatch\Config;
 
 abstract class Abs
 {
-    protected static $instance = [];
+    use Instance;
     public const QUEUE_TYPE_REDIS = 1;
     public const QUEUE_TYPE_KAFKA = 2;
     public const QUEUE_TYPE       = [
@@ -23,20 +24,12 @@ abstract class Abs
 
     protected $queueName = null;
 
-    protected $preQueueName = 'dispatch-producer-consumer:Queue:';
+    protected $preQueueName = null;
 
     protected function __construct(?string $queueName = null)
     {
-        $this->preQueueName = Config::redis()->get('pool.key.pre');
         $this->setQueueName($queueName);
-    }
-
-    public static function getInstance(string $queueName = null)
-    {
-        if (empty(static::$instance[$queueName])) {
-            static::$instance[$queueName] = new static($queueName);
-        }
-        return static::$instance[$queueName];
+        $this->setPreQueueName((string)Config::get('queue.redis.preKey'));
     }
 
     public function getQueueName(): ?string
@@ -49,7 +42,22 @@ abstract class Abs
         $this->queueName = strtolower($queueName);
     }
 
-    abstract public function pop(): ?AbstractJob;
+    abstract protected function getValue(): string;
+
+    public function pop(): AbstractJob
+    {
+        $value = $this->getValue();
+        if (empty($job = unserialize(base64_decode($value)))) {
+            debug($value, 'failed-unserialize');
+            return null;
+        }
+        if (!($job instanceof AbstractJob)) {
+            debug(sprintf("failed instance of AbstractJob"));
+            return null;
+        }
+        $this->afterParse($job);
+        return $job;
+    }
 
     public function getPreQueueName(): string
     {
@@ -69,5 +77,15 @@ abstract class Abs
     public function afterParse($obj)
     {
 
+    }
+
+    abstract public function push(string $job);
+
+    public function dispatch(AbstractJob $job)
+    {
+        if ($job->getTried() > 0 && $job->getTried() > $job->getTries()) {
+            throw new \Exception(sprintf('times out'));
+        }
+        $this->push($job->toString());
     }
 }

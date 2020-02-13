@@ -8,15 +8,13 @@
 
 namespace AsyncDispatch;
 
-use JimLog\Config;
 use Predis\Client;
 
 
 trait Redis
 {
-    public function redis()
+    protected function redis()
     {
-        Config::loadIni();
         static $redis = null;
         if (empty($redis)) {
             $config = Config::redis();

@@ -9,6 +9,7 @@
 namespace AsyncDispatch\Server\Queue\Kafka\Lite;
 
 
+use AsyncDispatch\Instance;
 use AsyncDispatch\Server\Queue\Kafka\Lite;
 use RdKafka\Conf;
 use RdKafka\Producer as RdKafkaProducer;
@@ -17,8 +18,8 @@ use RdKafka\TopicConf;
 
 class Producer
 {
-    protected static $instance = [];
-    protected        $topic;
+    use Instance;
+    protected $topic;
 
     public function getTopic(): ProducerTopic
     {
@@ -59,14 +60,6 @@ class Producer
             $conf = new Conf();
         }
         return $conf;
-    }
-
-    public static function getInstance(Lite $liteKafka, $channel = 'default')
-    {
-        if (!isset(static::$instance[$channel])) {
-            static::$instance[$channel] = new static($liteKafka);
-        }
-        return static::$instance[$channel];
     }
 }
 

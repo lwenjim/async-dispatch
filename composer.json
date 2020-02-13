@@ -24,11 +24,12 @@
             "AsyncDispatch\\": "src/"
         },
         "files": [
+            "bootstrap/bootstrap.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "AsyncDispatch\\Tests\\": "tests/"
         }
     },
     "require-dev": {

@@ -9,6 +9,8 @@
 namespace AsyncDispatch\Server;
 
 use AsyncDispatch\Server\Queue\Abs;
+use AsyncDispatch\Server\Queue\Factory;
+use AsyncDispatch\Config;
 use Swoole\Process\Pool as ProcessPool;
 
 class Pool
@@ -19,7 +21,6 @@ class Pool
     protected        $masterProcessId = null;
     protected        $process         = [];
     protected static $action          = ['workerStart', 'workerStop'];
-    protected static $processDir      =  "../runtime/log/pid/";
     protected        $block           = [];
 
     public function getProcNum(): ?int
@@ -68,17 +69,17 @@ class Pool
     public function setBlocking(int $pid, bool $blocking): void
     {
         $this->setBlock($pid, $blocking);
-        File::getInstance(self::$processDir . $pid)->open('w+')->write($blocking ? 1 : 2)->flush();
+        File::getInstance(self::getProcessDir() . $pid)->open('w+')->write($blocking ? 1 : 2)->flush();
     }
 
     public static function getBlocking(int $pid): int
     {
-        return File::getInstance(self::$processDir . $pid)->content();
+        return File::getInstance(self::getProcessDir() . $pid)->content();
     }
 
     public static function killSubProcess()
     {
-        $fileList = Directory::getInstance(self::$processDir)->scan();
+        $fileList = Directory::getInstance(self::getProcessDir())->scan();
         if (empty($fileList)) {
             return null;
         }
@@ -87,7 +88,7 @@ class Pool
                 return false;
             }
             $pid = (int)pathinfo($file->getFilename(), PATHINFO_BASENAME);
-            debug($pid.'-'.$file->content() . '-' . $file->getFilename() . "\n");
+            debug($pid . '-' . $file->content() . '-' . $file->getFilename() . "\n");
             return posix_kill($pid, SIGKILL);
         });
         if (empty($fileList)) return;
@@ -96,22 +97,25 @@ class Pool
         }, $fileList);
     }
 
-    public function __construct(Abs $queue, int $procNum)
+    public function __construct()
     {
-        $this->setProcNum($procNum);
-        $this->setQueue($queue);
+        $this->setQueue(Factory::factory());
         $this->setMasterProcessId(posix_getpid());
-        $this->setPool(new ProcessPool($procNum, 0, 0));
+        $this->setPool(new ProcessPool((int)Config::get('queue.num'), 0, 0));
         self::bind();
     }
 
     public function workerStart(ProcessPool $pool, $workerId)
     {
+        $this->_workerStart();
+    }
+
+    protected function _workerStart()
+    {
         pcntl_async_signals(true);
-        $pid                 = posix_getpid();
-        $running             = true;
+        $pid     = posix_getpid();
+        $running = true;
         pcntl_signal(SIGTERM, function () use (&$running, $pid) {
-            debug(['pid' => $pid = posix_getpid(), 'ppid' => $this->masterProcessId, 'information' => 'receive the signal of terminal']);
             $running = false;
             if (true == $this->getBlock($pid)) {
                 posix_kill($pid, SIGKILL);
@@ -177,6 +181,6 @@ class Pool
 
     public static function getProcessDir()
     {
-        return self::$processDir;
+        return Config::getAppPath().'/runtime/log/pid/';
     }
 }

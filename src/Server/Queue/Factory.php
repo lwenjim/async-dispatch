@@ -8,33 +8,18 @@
 
 namespace AsyncDispatch\Server\Queue;
 
-use InvalidArgumentException;
+use AsyncDispatch\Config;
 
 class Factory
 {
-    protected static function validate(string $name)
+    public static function factory(): ?Abs
     {
-        if (strlen($name) <= 6) {
-            throw new InvalidArgumentException();
-        }
-        if ('_' !== substr($name, 5, 1)) {
-            throw new InvalidArgumentException();
-        }
-        if (!in_array(substr($name, 0, 5), Abs::QUEUE_TYPE)) {
-            throw new InvalidArgumentException();
-        }
-
-    }
-
-    public static function factory(string $name): ?Abs
-    {
-        self::validate($name);
-        switch (ucfirst(substr($name, 0, 5))) {
+        switch (ucfirst(Config::get('queue.dirver'))) {
             case 'Kafka':
-                return Kafka::getInstance($name);
+                return Kafka::getInstance();
                 break;
             case 'Redis':
-                return Redis::getInstance($name);
+                return Redis::getInstance();
                 break;
         }
         return null;

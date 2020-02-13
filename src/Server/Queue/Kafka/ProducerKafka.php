@@ -8,8 +8,8 @@
 
 namespace AsyncDispatch\Server\Queue\Kafka;
 
+use AsyncDispatch\Config;
 use AsyncDispatch\Instance;
-use JimLog\Config;
 use JimLog\Ini;
 
 class ProducerKafka
@@ -18,17 +18,6 @@ class ProducerKafka
     protected $liteKafka = null;
     protected $config    = null;
     protected $topic     = null;
-
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-
-    public function setTopic($topic): self
-    {
-        $this->topic = $topic;
-        return $this;
-    }
 
     public function getLiteKafka(): ?Lite
     {
@@ -56,13 +45,13 @@ class ProducerKafka
         $this->setLiteKafka(new Lite(implode(',', $this->getBrokerList())));
     }
 
-    public function send(array $objMessage)
+    public function send(string $data)
     {
-        $topic = $this->getTopic();
+        $topic = $this->getConfig()->get('default.topic');
         $this->getLiteKafka()->setTopic($topic);
         $Producer = $this->getLiteKafka()->newProducer();
-        $Producer->setMessage(0, $res = json_encode($objMessage, JSON_UNESCAPED_UNICODE));
-        debug($objMessage, "ProducerKafka::send-{$objMessage['objectType']}-{$objMessage['action']}--topic--{$topic}");
+        $Producer->setMessage(0, $data);
+        debug($data, "ProducerKafka::send--topic--{$topic}");
     }
 
     protected function getBrokerList()
@@ -70,23 +59,6 @@ class ProducerKafka
         return array_map(function ($item) {
             list($ip, $port) = explode(":", $item);
             return $ip . ':' . ($port ? $port : $this->getConfig()->get('default.port'));
-        }, explode(",", $this->getConfig()->get('default.host')));
-    }
-
-    public static function sendAlgo(array $objMessage)
-    {
-        $map   = [
-            'SECTION'       => 'ALE_CMS_SECTION',
-            'SEGMENT_RANGE' => 'ALE_CMS_SEGMENT',
-            'COURSE_LO_MAP' => 'ALE_CMS_COURSE_LO_MAP',
-            'LO_MAP'        => 'ALE_CMS_LO_MAP',
-            'LO'            => 'ALE_CMS_LO',
-            'RES_QUESTION'  => 'ALE_CMS_RESQUESTION',
-            'RES_VIDEO'     => 'ALE_CMS_RESVIDEO'
-        ];
-        if (!isset($map[$objMessage['objectType']])) {
-            throw new \Exception(sprintf('undefined %s topic', $objMessage['objectType']));
-        }
-        self::getInstance()->setTopic($map[$objMessage['objectType']])->send($objMessage);
+        }, explode(",", (string)$this->getConfig()->get('default.host')));
     }
 }

@@ -9,7 +9,6 @@
 namespace AsyncDispatch\Server\Queue;
 
 
-use AsyncDispatch\AbstractJob;
 use AsyncDispatch\Redis as Cache;
 use Predis\Client as Predis;
 
@@ -31,15 +30,9 @@ class Redis extends Abs
         $this->redis = $this->redis();
     }
 
-    public function pop($handle = 'brpop'): ?AbstractJob
-    {
-        return $this->$handle();
-    }
-
-    protected function brpop()
+    protected function getValue(): string
     {
         $serializeValue = $this->getRedis()->brpop([$this->getPreQueueName() . $this->getQueueName()], 0);
-        debug("consumer message");
         if (empty($serializeValue)) {
             debug("serializeValue is empty");
             return null;
@@ -48,37 +41,13 @@ class Redis extends Abs
             debug(sprintf("empty serializeValue[1]"));
             return null;
         }
-        if (empty($job = unserialize(base64_decode($serializeValue[1])))) {
-            debug($serializeValue, 'failed-unserialize');
-            return null;
-        }
-        if (!($job instanceof AbstractJob)) {
-            debug(sprintf("failed instance of AbstractJob"));
-            return null;
-        }
         $this->beforeParse($serializeValue[1]);
-        $this->afterParse($job);
-        return $job;
+        return $serializeValue[1];
     }
 
-    protected function rpop()
+    public function push(string $data)
     {
-        $serializeValue = $this->getRedis()->rpop($this->getPreQueueName() . $this->getQueueName());
-
-        if (empty($serializeValue)) {
-            debug("serializeValue is empty");
-            return null;
-        }
-        if (empty($job = unserialize(base64_decode($serializeValue)))) {
-            debug($serializeValue, 'failed-unserialize');
-            return null;
-        }
-        if (!($job instanceof AbstractJob)) {
-            debug(sprintf("failed instance of AbstractJob"));
-            return null;
-        }
-        $this->beforeParse($serializeValue);
-        $this->afterParse($job);
-        return $job;
+        $redisKey = $this->getPreQueueName() . $this->getQueueName();
+        $this->getRedis()->lPush($redisKey, [$data]);
     }
 }

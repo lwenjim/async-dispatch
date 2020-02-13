@@ -8,6 +8,7 @@
 
 namespace AsyncDispatch;
 
+use AsyncDispatch\Server\Queue\Factory;
 use AsyncDispatch\Server\Queue\Kafka\ProducerKafka;
 
 abstract class AbstractJob
@@ -17,7 +18,7 @@ abstract class AbstractJob
     protected $queueName = 'redis_theone';
     protected $jobId     = null;
     protected $tried     = 0;
-    protected $algoData  = null;
+    protected $parameter  = null;
     protected $success   = false;
     protected $startTime = 0;
 
@@ -42,37 +43,23 @@ abstract class AbstractJob
         $this->success = $success;
     }
 
-    public function __construct(AbstractAlgoData $algoData)
+    public function __construct(AbstractParameter $parameter)
     {
-        if (!$algoData->validate()) {
-            $errors = [];
-            foreach ($algoData->getResult()->getMessages() as $field => $messages) {
-                foreach ($messages as $error => $message) {
-                    $errors[] = $error . "[" . $message . "]";
-                }
-                break;
-            }
-            throw new \Exception(sprintf("failed to validate, error:%s, data:%s", '{' . implode("}{", $errors) . '}', json_encode($algoData)));
-        }
-        $this->setAlgoData($algoData);
-        $this->setJobId(Math::generateNum());
+        $this->setParameter($parameter);
+        $this->setJobId(self::generateNum());
         if ($this->getTried() >= $this->getTries()) {
             throw new \Exception(sprintf("maxTimes must bigger than curTimes, maxTimes:%d, curTimes:%d", $this->getTries(), $this->getTried()));
         }
     }
 
-    public function dispatch(string $queueName = null): int
+    protected function generateNum()
     {
-        try{
-            $rs = Server::getInstance($queueName ? $queueName : $this->getQueueName())->dispatch($this);
-            if ($rs === false){
-                debug("queque push fail", "queque.push");
-            }
-        }catch (\Exception $e){
-            debug($e->getTraceAsString(), "queque.push");
-        }
+        return md5(uniqid(microtime(true),true));
+    }
 
-        return $rs;
+    public function dispatch()
+    {
+        Factory::factory()->dispatch($this);
     }
 
     public function getTries(): int
@@ -180,5 +167,10 @@ abstract class AbstractJob
             }
             $this->setTried($this->getTried() + 1);
         }
+    }
+
+    public function toString()
+    {
+        return base64_encode(serialize($this));
     }
 }

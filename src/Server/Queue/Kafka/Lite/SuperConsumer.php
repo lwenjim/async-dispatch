@@ -8,19 +8,20 @@
 
 namespace AsyncDispatch\Server\Queue\Kafka\Lite;
 
+use AsyncDispatch\Instance;
 use AsyncDispatch\Server\Queue\Kafka\Lite;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 
 class SuperConsumer
 {
-    protected        $socketTimeoutMs      = 1200;
-    protected        $autoCommitIntervalMs = 1000;
-    protected        $fetchWaitMaxMs       = 200;
-    protected        $autoOffsetReset      = "smallest";
-    protected        $consumer             = null;
-    protected        $liteKafka            = null;
-    protected static $instance             = [];
+    use Instance;
+    protected $socketTimeoutMs      = 1200;
+    protected $autoCommitIntervalMs = 1000;
+    protected $fetchWaitMaxMs       = 200;
+    protected $autoOffsetReset      = "smallest";
+    protected $consumer             = null;
+    protected $liteKafka            = null;
 
     public function getLiteKafka(): Lite
     {
@@ -94,14 +95,6 @@ class SuperConsumer
             default:
                 throw new \Exception($err);
         }
-    }
-
-    public static function getInstance(Lite $liteKafka, $channel = 'default')
-    {
-        if (!isset(static::$instance[$channel])) {
-            static::$instance[$channel] = new static($liteKafka);
-        }
-        return static::$instance[$channel];
     }
 
     protected function __construct(Lite $liteKafka)
