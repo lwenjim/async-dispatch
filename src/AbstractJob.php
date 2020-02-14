@@ -152,7 +152,7 @@ abstract class AbstractJob
         error($exception->getMessage());
         while (true) {
             if ($this->getTried() >= $this->getTries() - 1) {
-                error($this->algoData->toArray(), 'times-out');
+                error($this->getParameter(), 'times-out');
                 break;
             }
             try {

@@ -8,12 +8,14 @@
 
 namespace AsyncDispatch\AsyncDispatch;
 
+use AsyncDispatch\Instance;
+
 class File
 {
-    public           $filename    = "";
-    public           $handle      = null;
-    protected static $instance    = [];
-    public           $lastMessage = null;
+    use Instance;
+    public $filename    = "";
+    public $handle      = null;
+    public $lastMessage = null;
 
     protected function __construct($filename)
     {
@@ -29,14 +31,6 @@ class File
     {
         $this->filename = $filename;
         return $this;
-    }
-
-    public static function getInstance($filePath):self
-    {
-        if (empty(self::$instance[$filePath])) {
-            self::$instance[$filePath] = new self($filePath);
-        }
-        return self::$instance[$filePath];
     }
 
     public function open($mode)

@@ -8,12 +8,14 @@
 
 namespace AsyncDispatch\AsyncDispatch;
 
+use AsyncDispatch\Instance;
+
 class Directory
 {
-    public        $dirPath     = null;
-    public        $handle      = null;
-    public static $instance    = [];
-    public        $lastMessage = null;
+    use Instance;
+    public $dirPath     = null;
+    public $handle      = null;
+    public $lastMessage = null;
 
     public function getDirPath()
     {
@@ -29,14 +31,6 @@ class Directory
     protected function __construct($dirPath)
     {
         $this->dirPath = $dirPath;
-    }
-
-    public static function getInstance($dirPath): self
-    {
-        if (empty(self::$instance[$dirPath])) {
-            self::$instance[$dirPath] = new self($dirPath);
-        }
-        return self::$instance[$dirPath];
     }
 
     public function open($force = true)

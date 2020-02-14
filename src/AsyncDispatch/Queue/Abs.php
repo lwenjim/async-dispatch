@@ -44,15 +44,11 @@ abstract class Abs
 
     abstract protected function getValue(): string;
 
-    public function pop(): AbstractJob
+    public function pop(): ?AbstractJob
     {
         $value = $this->getValue();
-        if (empty($job = unserialize(base64_decode($value)))) {
-            debug($value, 'failed-unserialize');
-            return null;
-        }
-        if (!($job instanceof AbstractJob)) {
-            debug(sprintf("failed instance of AbstractJob"));
+        if (empty($value) || empty($job = unserialize(base64_decode($value))) || !($job instanceof AbstractJob)) {
+            debug($value, 'FailedUnserialize');
             return null;
         }
         $this->afterParse($job);

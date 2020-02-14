@@ -9,6 +9,7 @@
 namespace AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
 
 use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager;
+use AsyncDispatch\Instance;
 use RdKafka\Conf;
 use RdKafka\Consumer as RdKafkaConsumer;
 use RdKafka\ConsumerTopic;
@@ -16,12 +17,12 @@ use RdKafka\TopicConf;
 
 class Consumer
 {
-    protected        $topic        = null;
-    protected        $timeout      = 120;//s
-    protected        $partition    = 0;
-    protected        $consumer     = null;
-    protected        $kafKaLite = null;
-    protected static $instance     = [];
+    use Instance;
+    protected $topic     = null;
+    protected $timeout   = 120;//s
+    protected $partition = 0;
+    protected $consumer  = null;
+    protected $kafKaLite = null;
 
     public function getKafKaLite(): Manager
     {
@@ -34,7 +35,7 @@ class Consumer
         return $this;
     }
 
-    public function getTopic():ConsumerTopic
+    public function getTopic(): ConsumerTopic
     {
         return $this->topic;
     }
@@ -168,13 +169,5 @@ class Consumer
             $conf = new Conf();
         }
         return $conf;
-    }
-
-    public static function getInstance(Manager $liteKafka, $channel = 'default')
-    {
-        if (!isset(static::$instance[$channel])) {
-            static::$instance[$channel] = new static($liteKafka);
-        }
-        return static::$instance[$channel];
     }
 }

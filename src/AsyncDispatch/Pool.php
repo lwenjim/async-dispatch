@@ -140,7 +140,7 @@ class Pool
                     $job->exceptionHandle($exception);
                     unset($job);
                 } else {
-                    debug($exception->getMessage(), 'no-job-exception');
+                    debug($exception->getMessage(), 'NoJobException');
                 }
                 sleep(1);
             }
