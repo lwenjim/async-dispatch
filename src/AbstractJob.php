@@ -18,7 +18,7 @@ abstract class AbstractJob
     protected $queueName = 'redis_theone';
     protected $jobId     = null;
     protected $tried     = 0;
-    protected $parameter  = null;
+    protected $parameter = null;
     protected $success   = false;
     protected $startTime = 0;
 
@@ -54,7 +54,7 @@ abstract class AbstractJob
 
     protected function generateNum()
     {
-        return md5(uniqid(microtime(true),true));
+        return md5(uniqid(microtime(true), true));
     }
 
     public function dispatch()

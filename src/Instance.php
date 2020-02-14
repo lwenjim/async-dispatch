@@ -9,7 +9,6 @@
 namespace AsyncDispatch;
 
 
-
 trait Instance
 {
     protected static $container = [];
