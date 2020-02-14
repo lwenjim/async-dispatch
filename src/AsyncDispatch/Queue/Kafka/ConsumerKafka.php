@@ -13,7 +13,7 @@ use AsyncDispatch\Instance;
 use AsyncDispatch\AsyncDispatch\Queue\Kafka\Manager\SuperConsumer;
 use JimLog\Ini;
 
-class ConsumerRdkafka
+class ConsumerKafka
 {
     use Instance;
     protected $manager  = null;

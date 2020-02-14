@@ -9,7 +9,7 @@
 namespace AsyncDispatch\AsyncDispatch\Queue;
 
 
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\ConsumerRdkafka;
+use AsyncDispatch\AsyncDispatch\Queue\Kafka\ConsumerKafka;
 use AsyncDispatch\AsyncDispatch\Queue\Kafka\ProducerKafka;
 
 class Kafka extends Abs
@@ -34,14 +34,14 @@ class Kafka extends Abs
         $this->setKafkaProduct(ProducerKafka::getInstance());
     }
 
-    public function getKafkaConsumer(): ConsumerRdkafka
+    public function getKafkaConsumer(): ConsumerKafka
     {
         return $this->kafkaConsumer;
     }
 
     public function setKafkaConsumer()
     {
-        $this->kafkaConsumer = ConsumerRdkafka::getInstance();
+        $this->kafkaConsumer = ConsumerKafka::getInstance();
     }
 
     public function getValue(): string

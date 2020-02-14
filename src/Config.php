@@ -9,13 +9,12 @@
 
 namespace AsyncDispatch;
 
-use JimLog\Ini;
 
 /**
  * Class Config
- * @method static Ini kafka()
- * @method static Ini log()
- * @method static Ini redis()
+ * @method static \JimLog\Ini kafka()
+ * @method static \JimLog\Ini log()
+ * @method static \JimLog\Ini redis()
  * @package AsyncDispatch
  */
 class Config extends \JimLog\Config
@@ -37,7 +36,7 @@ class Config extends \JimLog\Config
         return self::$container[$key] = $instance;
     }
 
-    public static function getAlias()
+    protected static function getAlias()
     {
         return [
 
