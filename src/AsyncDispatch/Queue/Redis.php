@@ -33,12 +33,8 @@ class Redis extends Abs
     protected function getValue(): string
     {
         $serializeValue = $this->getRedis()->brpop([$this->getPreQueueName() . $this->getQueueName()], 0);
-        if (empty($serializeValue)) {
+        if (empty($serializeValue)||!isset($serializeValue[1])) {
             debug("serializeValue is empty");
-            return null;
-        }
-        if (!isset($serializeValue[1])) {
-            debug(sprintf("empty serializeValue[1]"));
             return null;
         }
         $this->beforeParse($serializeValue[1]);
