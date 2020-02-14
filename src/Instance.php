@@ -9,15 +9,17 @@
 namespace AsyncDispatch;
 
 
+
 trait Instance
 {
     protected static $container = [];
 
     public static function getInstance(...$params): self
     {
-        if (empty(self::$container)) {
-            self::$container = new static(...$params);
+        $className = get_called_class();
+        if (!Config::app($className)) {
+            Config::app($className, new static(...$params));
         }
-        return self::$container;
+        return Config::app($className);
     }
 }

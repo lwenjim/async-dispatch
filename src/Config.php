@@ -20,5 +20,27 @@ use JimLog\Ini;
  */
 class Config extends \JimLog\Config
 {
+    protected static $container = [];
 
+    public static function app(string $key = null, $instance = null)
+    {
+        if (empty($key)) {
+            return self::$container;
+        }
+        if (empty($instance)) {
+            $alias = array_flip(self::getAlias());
+            if (isset($alias[$key])) {
+                $key = $alias[$key];
+            }
+            return isset(self::$container[$key]) ? self::$container[$key] : false;
+        }
+        return self::$container[$key] = $instance;
+    }
+
+    public static function getAlias()
+    {
+        return [
+
+        ];
+    }
 }
