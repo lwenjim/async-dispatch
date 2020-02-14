@@ -686,12 +686,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lwenjim/log.git",
-                "reference": "6f830b22302464d015faececc378c1642df7b4dc"
+                "reference": "14c89a289dec32a2a5b4135d6ca2a6060c78112e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lwenjim/log/zipball/6f830b22302464d015faececc378c1642df7b4dc",
-                "reference": "6f830b22302464d015faececc378c1642df7b4dc",
+                "url": "https://api.github.com/repos/lwenjim/log/zipball/14c89a289dec32a2a5b4135d6ca2a6060c78112e",
+                "reference": "14c89a289dec32a2a5b4135d6ca2a6060c78112e",
                 "shasum": ""
             },
             "require": {
@@ -720,7 +720,7 @@
                 "MIT"
             ],
             "description": "record log",
-            "time": "2020-02-13T14:11:18+00:00"
+            "time": "2020-02-14T13:49:07+00:00"
         },
         {
             "name": "monolog/monolog",

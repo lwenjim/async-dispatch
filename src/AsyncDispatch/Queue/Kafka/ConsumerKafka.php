@@ -82,7 +82,7 @@ class ConsumerKafka
 
     protected function aliveConsumer()
     {
-        $topic   = $this->getConfig()->get('default.topic_return');
+        $topic   = $this->getConfig()->get('default.topic');
         $groupId = $this->getConfig()->get('default.group_id');
         $this->setConsumer($this->getManager()->newSuperConsumer($topic, $groupId));
     }
