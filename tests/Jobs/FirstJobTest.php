@@ -18,6 +18,7 @@ class FirstJobTest extends TestCase
 {
     /**
      * @test
+     * @throws \Exception
      */
     public function handle()
     {
