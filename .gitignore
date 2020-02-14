@@ -27,5 +27,6 @@ phpunit.xml
 
 # runtime log
 nohup.out
-runtime/*
+runtime/*.log
+runtime/log/
 vendor
