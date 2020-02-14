@@ -21,16 +21,16 @@ class SuperConsumer
     protected $fetchWaitMaxMs       = 200;
     protected $autoOffsetReset      = "smallest";
     protected $consumer             = null;
-    protected $liteKafka            = null;
+    protected $manager              = null;
 
-    public function getLiteKafka(): Manager
+    public function getManager(): Manager
     {
-        return $this->liteKafka;
+        return $this->manager;
     }
 
-    public function setLiteKafka(Manager $liteKafka): void
+    public function setManager(Manager $manager): void
     {
-        $this->liteKafka = $liteKafka;
+        $this->manager = $manager;
     }
 
     public function getConsumer(): KafkaConsumer
@@ -97,11 +97,11 @@ class SuperConsumer
         }
     }
 
-    protected function __construct(Manager $liteKafka)
+    protected function __construct(Manager $manager)
     {
-        $this->setLiteKafka($liteKafka);
+        $this->setManager($manager);
         $this->setConsumer(new KafkaConsumer($this->getKafkaConf()));
-        $this->getConsumer()->subscribe([$this->getLiteKafka()->getTopic()]);
+        $this->getConsumer()->subscribe([$this->getManager()->getTopic()]);
     }
 
     protected function getKafkaConf()
@@ -110,8 +110,8 @@ class SuperConsumer
         if (null == $conf) {
             $conf = new Conf();
             $conf->setRebalanceCb([$this, 'callBackRebalance']);
-            $conf->set('group.id', $this->getLiteKafka()->getGroupId());
-            $conf->set('metadata.broker.list', $this->getLiteKafka()->getBrokerList());
+            $conf->set('group.id', $this->getManager()->getGroupId());
+            $conf->set('metadata.broker.list', $this->getManager()->getBrokerList());
             $conf->set('socket.timeout.ms', $this->getSocketTimeoutMs());
             $conf->set('fetch.wait.max.ms', $this->getFetchWaitMaxMs());
             if (function_exists('pcntl_sigprocmask')) {

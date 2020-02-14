@@ -22,16 +22,16 @@ class Consumer
     protected $timeout   = 120;//s
     protected $partition = 0;
     protected $consumer  = null;
-    protected $kafKaLite = null;
+    protected $manager   = null;
 
-    public function getKafKaLite(): Manager
+    public function getManager(): Manager
     {
-        return $this->kafKaLite;
+        return $this->manager;
     }
 
-    public function setKafKaLite($kafKaLite): self
+    public function setManager($manager): self
     {
-        $this->kafKaLite = $kafKaLite;
+        $this->manager = $manager;
         return $this;
     }
 
@@ -65,12 +65,12 @@ class Consumer
         $this->consumer = $consumer;
     }
 
-    protected function __construct(Manager $kafKaLite)
+    protected function __construct(Manager $manager)
     {
         $this->setConsumer(new RdKafkaConsumer($this->getKafKaConf()));
-        $this->getConsumer()->addBrokers($kafKaLite->getBrokerList());
-        $this->setTopic($this->getConsumer()->newTopic($kafKaLite->getTopic(), $this->getTopicConf()));
-        $this->setKafKaLite($kafKaLite);
+        $this->getConsumer()->addBrokers($manager->getBrokerList());
+        $this->setTopic($this->getConsumer()->newTopic($manager->getTopic(), $this->getTopicConf()));
+        $this->setManager($manager);
     }
 
     public function getTimeout(): int
@@ -114,7 +114,7 @@ class Consumer
     public function consumeMultiTopic(...$topics)
     {
         $queue = $this->getConsumer()->newQueue();
-        foreach (array_merge($topics, $this->getKafKaLite()->getTopic()) as $topic) {
+        foreach (array_merge($topics, $this->getManager()->getTopic()) as $topic) {
             $this->getConsumer()->newTopic($topic, $this->getTopicConf())->consumeQueueStart(0, RD_KAFKA_OFFSET_BEGINNING, $queue);
         }
         $message = $queue->consume($this->getTimeout() * 1000);
