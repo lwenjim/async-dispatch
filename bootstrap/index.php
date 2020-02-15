@@ -6,8 +6,9 @@
  * Time: 22:09
  */
 
-require_once(__DIR__ . '/../vendor/autoload.php');
 use AsyncDispatch\AsyncDispatch;
+
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 if (!in_array($func = $argv[1], ['start', 'stop'])) {
     die('deny');

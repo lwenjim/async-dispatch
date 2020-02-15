@@ -10,7 +10,7 @@
 namespace AsyncDispatch\Tests\AsyncDispatch\Queue\Kafka;
 
 
-use AsyncDispatch\AsyncDispatch\Queue\Kafka\ConsumerKafka;
+use AsyncDispatch\Queue\Kafka\ConsumerKafka;
 use PHPUnit\Framework\TestCase;
 
 class ConsumerKafkaTest extends TestCase

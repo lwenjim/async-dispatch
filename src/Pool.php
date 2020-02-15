@@ -6,11 +6,10 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\AsyncDispatch;
+namespace AsyncDispatch;
 
-use AsyncDispatch\AsyncDispatch\Queue\Abs;
-use AsyncDispatch\AsyncDispatch\Queue\Factory;
-use AsyncDispatch\Config;
+use AsyncDispatch\Queue\Abs;
+use AsyncDispatch\Queue\Factory;
 use Swoole\Process\Pool as ProcessPool;
 
 class Pool

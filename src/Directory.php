@@ -6,9 +6,8 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\AsyncDispatch;
+namespace AsyncDispatch;
 
-use AsyncDispatch\Instance;
 
 class Directory
 {

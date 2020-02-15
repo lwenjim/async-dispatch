@@ -8,7 +8,6 @@
 
 namespace AsyncDispatch;
 
-use AsyncDispatch\AsyncDispatch\Pool;
 
 class AsyncDispatch
 {
