@@ -12,16 +12,9 @@ use AsyncDispatch\Config;
 
 class Factory
 {
-    public static function factory(): ?Abs
+    public static function makeQueue(): ?Abs
     {
-        switch (ucfirst((string)Config::get('queue.dirver'))) {
-            case 'Kafka':
-                return Kafka::getInstance();
-                break;
-            case 'Redis':
-                return Redis::getInstance();
-                break;
-        }
-        return null;
+        $driver = sprintf('\AsyncDispatch\Queues\\%s', ucfirst((string)Config::get('queue.dirver')));
+        return $driver::getInstance();
     }
 }

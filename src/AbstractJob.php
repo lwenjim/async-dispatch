@@ -59,7 +59,7 @@ abstract class AbstractJob
 
     public function dispatch()
     {
-        Factory::factory()->dispatch($this);
+        Factory::makeQueue()->dispatch($this);
     }
 
     public function getTries(): int

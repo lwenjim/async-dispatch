@@ -98,7 +98,7 @@ class Pool
 
     public function __construct()
     {
-        $this->setQueue(Factory::factory());
+        $this->setQueue(Factory::makeQueue());
         $this->setMasterProcessId(posix_getpid());
         $this->setPool(new ProcessPool((int)Config::get('queue.num'), 0, 0));
         //self::bind();
