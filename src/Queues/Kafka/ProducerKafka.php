@@ -6,7 +6,7 @@
  * Time: 10:42 AM
  */
 
-namespace AsyncDispatch\Queue\Kafka;
+namespace AsyncDispatch\Queues\Kafka;
 
 use AsyncDispatch\Config;
 use AsyncDispatch\Instance;

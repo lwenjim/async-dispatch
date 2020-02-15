@@ -17,12 +17,12 @@ BASE_PATH=$(cd `dirname $0`; pwd)
 # "$BASE_PATH/startPool.sh" subTask 2
 # "$BASE_PATH/startPool.sh" subTask:try 1
 
-# Queue=('dispatch' 'subTask')
+# Queues=('dispatch' 'subTask')
 
 source "$BASE_PATH/init.sh"
 
-# for (( VAR = 0; VAR < ${#Queue[@]}; ++VAR )); do
-#     cmd="$BASE_PATH/startPool.sh ${Queue[VAR]} 2"
+# for (( VAR = 0; VAR < ${#Queues[@]}; ++VAR )); do
+#     cmd="$BASE_PATH/startPool.sh ${Queues[VAR]} 2"
 #     echo -e "exec:$cmd\n"
 #     $cmd
 # done

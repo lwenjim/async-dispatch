@@ -6,12 +6,12 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Queue\Kafka;
+namespace AsyncDispatch\Queues\Kafka;
 
 
-use AsyncDispatch\Queue\Kafka\Manager\Consumer;
-use AsyncDispatch\Queue\Kafka\Manager\Producer;
-use AsyncDispatch\Queue\Kafka\Manager\SuperConsumer;
+use AsyncDispatch\Queues\Kafka\Manager\Consumer;
+use AsyncDispatch\Queues\Kafka\Manager\Producer;
+use AsyncDispatch\Queues\Kafka\Manager\SuperConsumer;
 
 class Manager
 {

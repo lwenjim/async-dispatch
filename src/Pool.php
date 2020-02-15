@@ -8,8 +8,8 @@
 
 namespace AsyncDispatch;
 
-use AsyncDispatch\Queue\Abs;
-use AsyncDispatch\Queue\Factory;
+use AsyncDispatch\Queues\Abs;
+use AsyncDispatch\Queues\Factory;
 use Swoole\Process\Pool as ProcessPool;
 
 class Pool

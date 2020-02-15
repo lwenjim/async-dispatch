@@ -8,8 +8,8 @@
 
 namespace AsyncDispatch;
 
-use AsyncDispatch\Queue\Factory;
-use AsyncDispatch\Queue\Kafka\ProducerKafka;
+use AsyncDispatch\Queues\Factory;
+use AsyncDispatch\Queues\Kafka\ProducerKafka;
 
 abstract class AbstractJob
 {

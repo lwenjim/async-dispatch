@@ -6,11 +6,11 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Queue;
+namespace AsyncDispatch\Queues;
 
 
-use AsyncDispatch\Queue\Kafka\ConsumerKafka;
-use AsyncDispatch\Queue\Kafka\ProducerKafka;
+use AsyncDispatch\Queues\Kafka\ConsumerKafka;
+use AsyncDispatch\Queues\Kafka\ProducerKafka;
 
 class Kafka extends Abs
 {

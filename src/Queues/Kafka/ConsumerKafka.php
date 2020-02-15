@@ -6,11 +6,11 @@
  * Time: 10:37 AM
  */
 
-namespace AsyncDispatch\Queue\Kafka;
+namespace AsyncDispatch\Queues\Kafka;
 
 use AsyncDispatch\Config;
 use AsyncDispatch\Instance;
-use AsyncDispatch\Queue\Kafka\Manager\SuperConsumer;
+use AsyncDispatch\Queues\Kafka\Manager\SuperConsumer;
 use JimLog\Ini;
 
 class ConsumerKafka

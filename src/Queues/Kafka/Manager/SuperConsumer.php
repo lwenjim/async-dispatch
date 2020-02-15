@@ -6,10 +6,10 @@
  * Time: 3:42 PM
  */
 
-namespace AsyncDispatch\Queue\Kafka\Manager;
+namespace AsyncDispatch\Queues\Kafka\Manager;
 
 use AsyncDispatch\Instance;
-use AsyncDispatch\Queue\Kafka\Manager;
+use AsyncDispatch\Queues\Kafka\Manager;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 use RdKafka\TopicConf as RdKafkaTopicConf;
@@ -118,7 +118,7 @@ class SuperConsumer
                 pcntl_sigprocmask(SIG_BLOCK, array(SIGIO));
                 $conf->set('internal.termination.signal', SIGIO);
             } else {
-                $conf->set('Queue.buffering.max.ms', 1);
+                $conf->set('Queues.buffering.max.ms', 1);
             }
             @$conf->setDefaultTopicConf($this->getTopicConf());
         }
