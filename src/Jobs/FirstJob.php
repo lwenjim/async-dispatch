@@ -15,6 +15,7 @@ use AsyncDispatch\Jobs\Parameters\FirstParameter;
 
 class FirstJob extends AbstractJob
 {
+    protected $flag = 222;
     public function getParameter():FirstParameter
     {
         return $this->parameter;
@@ -27,6 +28,5 @@ class FirstJob extends AbstractJob
 
     public function handle()
     {
-        debug(date('Y-m-d H:i:s'));
     }
 }

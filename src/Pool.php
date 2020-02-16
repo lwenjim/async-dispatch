@@ -102,7 +102,8 @@ class Pool
         $this->setMasterProcessId(posix_getpid());
         $this->setPool(new ProcessPool((int)Config::get('queue.num'), 0, 0));
         //self::bind();
-        $this->_workerStart();
+        //$this->_workerStart();
+        $this->_workStartSimple();exit;
     }
 
     public function workerStart(ProcessPool $pool, $workerId)
@@ -122,27 +123,33 @@ class Pool
             }
         });
         while ($running) {
-            try {
-                pcntl_signal_dispatch();
-                $this->setBlocking($pid, true);
-                $job = $this->getQueue()->pop();
-                $this->setBlocking($pid, false);
-                if (null == $job) {
-                    sleep(1);
-                    continue;
-                }
-                $job->beforeHandle();
-                $job->handle();
-                $job->afterHandle();
-            } catch (\Exception | \Error $exception) {
-                if (isset($job)) {
-                    $job->exceptionHandle($exception);
-                    unset($job);
-                } else {
-                    debug($exception->getMessage(), 'NoJobException');
-                }
+            $this->_workStartSimple();
+        }
+    }
+
+    protected function _workStartSimple()
+    {
+        try {
+            $pid     = posix_getpid();
+            pcntl_signal_dispatch();
+            $this->setBlocking($pid, true);
+            $job = $this->getQueue()->pop();
+            $this->setBlocking($pid, false);
+            if (null == $job) {
                 sleep(1);
+                return;
             }
+            $job->beforeHandle();
+            $job->handle();
+            $job->afterHandle();
+        } catch (\Exception | \Error $exception) {
+            if (isset($job)) {
+                $job->exceptionHandle($exception);
+                unset($job);
+            } else {
+                debug($exception->getMessage(), 'NoJobException');
+            }
+            sleep(1);
         }
     }
 

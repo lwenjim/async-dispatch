@@ -74,10 +74,11 @@ class ConsumerKafka
             $this->aliveConsumer();
         }
         $message = $this->getConsumer()->consume($timeout);
-        if (!empty($message) && !empty($message->payload)) {
-            return $message->payload;
+        if (empty($message) || empty($message->payload)) {
+            return null;
         }
-        return null;
+        debug($message->payload, "ConsumerKafka::send--topic--{$this->getTopic()}");
+        return $message->payload;
     }
 
     protected function aliveConsumer()
