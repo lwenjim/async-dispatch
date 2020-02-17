@@ -12,6 +12,7 @@ use AsyncDispatch\Config;
 use AsyncDispatch\Instance;
 use AsyncDispatch\Queues\Kafka\Manager\SuperConsumer;
 use JimLog\Ini;
+use RdKafka\TopicPartition;
 
 class ConsumerKafka
 {
@@ -77,6 +78,12 @@ class ConsumerKafka
         if (empty($message) || empty($message->payload)) {
             return null;
         }
+        $topicPartition = new TopicPartition($this->getTopic(), 0);
+        $timeoutMs = 10000000;
+        debug($this->getConsumer()->getCommittedOffsets([$topicPartition], $timeoutMs));
+        debug($this->getConsumer()->getOffsetPositions([$topicPartition]));
+        debug($this->getConsumer()->getAssignment());
+        debug($this->getConsumer()->getSubscription());
         debug($message->payload, "ConsumerKafka::send--topic--{$this->getTopic()}");
         return $message->payload;
     }

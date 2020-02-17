@@ -46,4 +46,9 @@ class Redis extends Abs
         $redisKey = $this->getPreQueueName() . $this->getQueueName();
         $this->getRedis()->lPush($redisKey, [$data]);
     }
+
+    public function commit()
+    {
+
+    }
 }

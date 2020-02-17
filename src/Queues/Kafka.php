@@ -53,4 +53,9 @@ class Kafka extends Abs
     {
         $this->getKafkaProduct()->send($data);
     }
+
+    public function commit()
+    {
+        $this->getKafkaConsumer()->getConsumer()->commit();
+    }
 }

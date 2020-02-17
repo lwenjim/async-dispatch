@@ -13,6 +13,16 @@ use AsyncDispatch\Queues\Kafka\Manager;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 use RdKafka\TopicConf as RdKafkaTopicConf;
+
+/**
+ * Class SuperConsumer
+ * @method array getCommittedOffsets(array $topics , int $timeout_ms)
+ * @method array getOffsetPositions(array $topics)
+ * @method array getAssignment()
+ * @method array getSubscription()
+ * @method array commit()
+ * @package AsyncDispatch\Queues\Kafka\Manager
+ */
 class SuperConsumer
 {
     use Instance;
@@ -112,6 +122,7 @@ class SuperConsumer
             $conf->setRebalanceCb([$this, 'callBackRebalance']);
             $conf->set('group.id', $this->getManager()->getGroupId());
             $conf->set('metadata.broker.list', $this->getManager()->getBrokerList());
+            $conf->set('enable.auto.commit', 'false');
             $conf->set('socket.timeout.ms', $this->getSocketTimeoutMs());
             $conf->set('fetch.wait.max.ms', $this->getFetchWaitMaxMs());
             if (function_exists('pcntl_sigprocmask')) {
@@ -138,6 +149,7 @@ class SuperConsumer
 
     public function consume($timeout)
     {
+        $this->getConsumer()->commit();
         $message = $this->getConsumer()->consume($timeout * 1000);
         if (empty($message)) return false;
         switch ($message->err) {
@@ -153,5 +165,10 @@ class SuperConsumer
                 throw new \Exception($message->errstr(), $message->err);
         }
         return false;
+    }
+
+    public function __call($name, $arguments)
+    {
+        return $this->getConsumer()->$name(...$arguments);
     }
 }

@@ -84,4 +84,6 @@ abstract class Abs
         }
         $this->push($job->toString());
     }
+
+    abstract function commit();
 }

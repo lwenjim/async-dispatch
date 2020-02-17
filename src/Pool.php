@@ -142,6 +142,7 @@ class Pool
             $job->beforeHandle();
             $job->handle();
             $job->afterHandle();
+            $this->getQueue()->commit();
         } catch (\Exception | \Error $exception) {
             if (isset($job)) {
                 $job->exceptionHandle($exception);
