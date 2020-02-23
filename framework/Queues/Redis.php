@@ -9,12 +9,13 @@
 namespace AsyncDispatch\Queues;
 
 
+use AsyncDispatch\Instance;
 use AsyncDispatch\Redis as Cache;
 use Predis\Client as Predis;
 
 class Redis extends Abs
 {
-    use Cache;
+    use Cache, Instance;
     protected $redis = null;
 
     public function getRedis(): Predis

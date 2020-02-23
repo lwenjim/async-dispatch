@@ -9,12 +9,10 @@
 namespace AsyncDispatch\Queues;
 
 use AsyncDispatch\AbstractJob;
-use AsyncDispatch\Instance;
 use AsyncDispatch\Config;
 
 abstract class Abs
 {
-
     public const QUEUE_TYPE_REDIS = 1;
     public const QUEUE_TYPE_KAFKA = 2;
     public const QUEUE_TYPE       = [
