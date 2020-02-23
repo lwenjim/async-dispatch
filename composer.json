@@ -14,23 +14,20 @@
         "ext-swoole": "^4.2",
         "guzzlehttp/guzzle": "6.3.3",
         "illuminate/validation": "v5.8.29",
-        "lwenjim/log": "1.0.x-dev",
         "monolog/monolog": "1.24.0",
         "particle/validator": "2.3.3",
         "predis/predis": "^1.1"
     },
     "autoload": {
         "psr-4": {
-            "AsyncDispatch\\": "src/"
+            "AsyncDispatch\\": "framework/",
+            "AsyncDispatch\\Tests\\": "tests/",
+            "AsyncDispatch\\App\\": "app/"
         },
         "files": [
+            "framework/helps.php",
             "bootstrap/bootstrap.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AsyncDispatch\\Tests\\": "tests/"
-        }
     },
     "require-dev": {
         "eaglewu/swoole-ide-helper": "dev-master",

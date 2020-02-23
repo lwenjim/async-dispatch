@@ -9,9 +9,10 @@
 namespace AsyncDispatch\Queues\Kafka;
 
 use AsyncDispatch\Config;
+use AsyncDispatch\Ini;
 use AsyncDispatch\Instance;
 use AsyncDispatch\Queues\Kafka\Manager\SuperConsumer;
-use JimLog\Ini;
+
 use RdKafka\TopicPartition;
 
 class ConsumerKafka

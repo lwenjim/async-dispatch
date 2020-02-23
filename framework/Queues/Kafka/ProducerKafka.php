@@ -9,8 +9,9 @@
 namespace AsyncDispatch\Queues\Kafka;
 
 use AsyncDispatch\Config;
+use AsyncDispatch\Ini;
 use AsyncDispatch\Instance;
-use JimLog\Ini;
+
 
 class ProducerKafka
 {

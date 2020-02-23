@@ -7,11 +7,11 @@
  */
 
 
-namespace AsyncDispatch\Jobs;
+namespace AsyncDispatch\App\Jobs;
 
 
 use AsyncDispatch\AbstractJob;
-use AsyncDispatch\Jobs\Parameters\FirstParameter;
+use AsyncDispatch\App\Jobs\Parameters\FirstParameter;
 
 class FirstJob extends AbstractJob
 {

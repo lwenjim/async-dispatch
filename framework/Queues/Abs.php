@@ -14,7 +14,7 @@ use AsyncDispatch\Config;
 
 abstract class Abs
 {
-    use Instance;
+
     public const QUEUE_TYPE_REDIS = 1;
     public const QUEUE_TYPE_KAFKA = 2;
     public const QUEUE_TYPE       = [

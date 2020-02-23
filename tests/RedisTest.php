@@ -10,7 +10,8 @@
 namespace AsyncDispatch\Tests;
 
 
-use JimLog\Config;
+
+use AsyncDispatch\Config;
 use PHPUnit\Framework\TestCase;
 
 class RedisTest extends TestCase

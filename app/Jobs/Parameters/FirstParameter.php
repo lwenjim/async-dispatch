@@ -7,7 +7,7 @@
  */
 
 
-namespace AsyncDispatch\Jobs\Parameters;
+namespace AsyncDispatch\App\Jobs\Parameters;
 
 
 use AsyncDispatch\AbstractParameter;

@@ -9,11 +9,13 @@
 namespace AsyncDispatch\Queues;
 
 
+use AsyncDispatch\Instance;
 use AsyncDispatch\Queues\Kafka\ConsumerKafka;
 use AsyncDispatch\Queues\Kafka\ProducerKafka;
 
 class Kafka extends Abs
 {
+    use Instance;
     protected $kafkaConsumer = null;
     protected $kafkaProduct  = null;
 

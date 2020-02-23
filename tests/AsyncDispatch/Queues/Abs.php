@@ -10,9 +10,9 @@
 namespace AsyncDispatch\Tests\AsyncDispatch\Queues;
 
 
+use AsyncDispatch\App\Jobs\FirstJob;
+use AsyncDispatch\App\Jobs\Parameters\FirstParameter;
 use AsyncDispatch\AsyncDispatch;
-use AsyncDispatch\Jobs\FirstJob;
-use AsyncDispatch\Jobs\Parameters\FirstParameter;
 use PHPUnit\Framework\TestCase;
 
 class Abs extends TestCase

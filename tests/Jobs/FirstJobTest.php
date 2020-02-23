@@ -10,8 +10,8 @@
 namespace AsyncDispatch\Tests\Jobs;
 
 
-use AsyncDispatch\Jobs\FirstJob;
-use AsyncDispatch\Jobs\Parameters\FirstParameter;
+use AsyncDispatch\App\Jobs\FirstJob;
+use AsyncDispatch\App\Jobs\Parameters\FirstParameter;
 use PHPUnit\Framework\TestCase;
 
 class FirstJobTest extends TestCase
